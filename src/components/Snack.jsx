@@ -1,11 +1,16 @@
 import { Alert, Snackbar } from '@mui/material'
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { hideSnack } from '../store/slices/snack';
 
-export default function Snack({ isOpen, handleClose }) {
+export default function Snack() {
+  const { visible } = useSelector(state => state.snack);
+  const dispatch = useDispatch();
+
   return (
-    <Snackbar open={isOpen} onClose={handleClose} autoHideDuration={3000}>
+    <Snackbar open={visible} onClose={() => dispatch(hideSnack())} autoHideDuration={3000}>
       <Alert security='info'>
-        Added to cart
+        Добавлено в корзину
       </Alert>
     </Snackbar>
   )
